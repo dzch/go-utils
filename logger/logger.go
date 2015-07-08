@@ -10,6 +10,7 @@ import (
 		)
 
 // log level
+type LogLevel int
 const (
 		DEBUG = 16
 		TRACE = 8
@@ -18,7 +19,7 @@ const (
 		FATAL = 1
 		OFF = 0
 	  )
-var level_prefix = map[uint8]string {
+var level_prefix = map[LogLevel]string {
     DEBUG : "DEBUG:",
 	TRACE : "TRACE:",
 	NOTICE : "NOTICE:",
@@ -28,7 +29,7 @@ var level_prefix = map[uint8]string {
 
 // logger struct
 type _Logger struct {
-	log_level uint8
+	log_level LogLevel
 	log_dir string
 	log_file_prefix string
 	nm_file_name string
@@ -87,7 +88,7 @@ func (l *_Logger) _Check() (err error) {
 	return nil
 }
 
-func (l *_Logger) _Write(level uint8, format string, v ...interface{}) {
+func (l *_Logger) _Write(level LogLevel, format string, v ...interface{}) {
 	if level > l.log_level {
 		return
 	}
@@ -107,7 +108,7 @@ func (l *_Logger) _Write(level uint8, format string, v ...interface{}) {
 	}
 }
 
-func _NewLogger(dir string, file_prefix string, level uint8) (obj *_Logger, err error) {
+func _NewLogger(dir string, file_prefix string, level LogLevel) (obj *_Logger, err error) {
 	obj = &_Logger{
         log_level: level,
 		log_dir : dir,
@@ -122,7 +123,7 @@ func _NewLogger(dir string, file_prefix string, level uint8) (obj *_Logger, err 
 	return obj, nil
 }
 
-func Init(dir string, file_prefix string, level uint8) (err error) {
+func Init(dir string, file_prefix string, level LogLevel) (err error) {
 	if logger_obj != nil {
 		return nil
 	}
