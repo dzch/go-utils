@@ -89,9 +89,6 @@ func (l *_Logger) _Check() (err error) {
 }
 
 func (l *_Logger) _Write(level LogLevel, format string, v ...interface{}) {
-	if level > l.log_level {
-		return
-	}
 	_, file, line, _ := runtime.Caller(2)
 	l.mutex.Lock()
 	defer l.mutex.Unlock()
@@ -142,22 +139,37 @@ func Init(dir string, file_prefix string, level LogLevel) (err error) {
 }
 
 func Debug(format string, v ...interface{}) {
+	if DEBUG > l.log_level {
+		return
+	}
 	logger_obj._Write(DEBUG, format, v...)
 }
 
 func Trace(format string, v ...interface{}) {
+	if TRACE > l.log_level {
+		return
+	}
 	logger_obj._Write(TRACE, format, v...)
 }
 
 func Notice(format string, v ...interface{}) {
+	if NOTICE > l.log_level {
+		return
+	}
 	logger_obj._Write(NOTICE, format, v...)
 }
 
 func Warning(format string, v ...interface{}) {
+	if WARNING > l.log_level {
+		return
+	}
 	logger_obj._Write(WARNING, format, v...)
 }
 
 func Fatal(format string, v ...interface{}) {
+	if FATAL > l.log_level {
+		return
+	}
 	logger_obj._Write(FATAL, format, v...)
 }
 
