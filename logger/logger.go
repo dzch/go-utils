@@ -139,35 +139,35 @@ func Init(dir string, file_prefix string, level LogLevel) (err error) {
 }
 
 func Debug(format string, v ...interface{}) {
-	if DEBUG > l.log_level {
+	if DEBUG > logger_obj.log_level {
 		return
 	}
 	logger_obj._Write(DEBUG, format, v...)
 }
 
 func Trace(format string, v ...interface{}) {
-	if TRACE > l.log_level {
+	if TRACE > logger_obj.log_level {
 		return
 	}
 	logger_obj._Write(TRACE, format, v...)
 }
 
 func Notice(format string, v ...interface{}) {
-	if NOTICE > l.log_level {
+	if NOTICE > logger_obj.log_level {
 		return
 	}
 	logger_obj._Write(NOTICE, format, v...)
 }
 
 func Warning(format string, v ...interface{}) {
-	if WARNING > l.log_level {
+	if WARNING > logger_obj.log_level {
 		return
 	}
 	logger_obj._Write(WARNING, format, v...)
 }
 
 func Fatal(format string, v ...interface{}) {
-	if FATAL > l.log_level {
+	if FATAL > logger_obj.log_level {
 		return
 	}
 	logger_obj._Write(FATAL, format, v...)
