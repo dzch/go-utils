@@ -85,5 +85,7 @@ func (rp *RedisPool) Do(commandName string, args ...interface{}) (reply interfac
 }
 
 func (rp *RedisPool) Close() {
-	rp.rcp.Close()
+	for _, p := range rp.rcp {
+		p.Close()
+	}
 }
