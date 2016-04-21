@@ -83,3 +83,7 @@ func (rp *RedisPool) Do(commandName string, args ...interface{}) (reply interfac
 	defer rp.Put(c)
 	return c.Do(commandName, args...)
 }
+
+func (rp *RedisPool) Close() {
+	rp.rcp.Close()
+}
