@@ -80,7 +80,7 @@ func (rp *RedisPool) Do(commandName string, args ...interface{}) (reply interfac
 	if err != nil {
 		return nil, err
 	}
-	defer rp.Put(c)
+	defer c.Close()
 	return c.Do(commandName, args...)
 }
 
