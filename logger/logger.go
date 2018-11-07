@@ -186,3 +186,10 @@ func Close() {
 		logger_obj.wf_file.Close()
 	}
 }
+
+type NoticeWriter struct{}
+
+func (w NoticeWriter) Write(p []byte) (n int, err error) {
+	Notice("%s", p)
+	return len(p), nil
+}
